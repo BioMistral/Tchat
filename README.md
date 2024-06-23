@@ -40,7 +40,7 @@ This project is the result of the collaboration between:
 1. Create a conda environement `test`
 2. Install the dependencies with `pip install -r requirements.txt`
 3. Prevent errors on MacOS for M1 chips: `export PYTORCH_ENABLE_MPS_FALLBACK=1`
-4. Download BioMistarl using Ollama: `ollama pull cniongolo/biomistral`
+4. Download BioMistral using Ollama: `ollama pull cniongolo/biomistral`
 5. Run the server in background: `ollama serve&`
 6. Start the web services: `python3 -m flask --app app --debug run`
 7. Go to the demonstration page: `127.0.0.1:5000/`
