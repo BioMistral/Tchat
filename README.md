@@ -30,3 +30,64 @@ This project is the result of the collaboration between:
 **Authors** : Yanis LABRAK (1,4) ; Adrien BAZOGE (2,3) ; Emmanuel MORIN (3) ; Pierre-Antoine GOURAUD (2) ; Mickaël ROUVIER (1) ; Richard DUFOUR (3)
 
 **Caution:** We recommend using BioMistral 7B strictly as a research tool and advise against deploying it in production environments for natural language generation or any professional health and medical purposes.
+
+# Setup
+
+1. Create a conda environement `test`
+2. Install the dependencies with `pip install -r requirements.txt`
+3. Prevent errors on MacOS for M1 chips: `export PYTORCH_ENABLE_MPS_FALLBACK=1`
+4. Download BioMistarl using Ollama: `ollama pull cniongolo/biomistral`
+5. Run the server in background: `ollama serve&`
+6. Start the web services: `python3 -m flask --app app --debug run`
+7. Go to the demonstration page: `127.0.0.1:5000/`
+
+# API Endpoints
+
+You can also access to the web services using the Flask API:
+- Query the LLMs using HTTP POST:
+```javascript
+$.ajax({
+    url: '/api/v1/chat',
+    data: data_transcript,
+    processData: false,
+    contentType: false,
+    crossDomain: true,
+    type: 'POST',
+    success: function(data_llm){
+      console.log(data_llm);
+    }
+});
+```
+- Socket for querying the LLM (socket `chat`) and listen to a output stream of the channel `chat_response`:
+```javascript
+socket.on('chat_response', function(msg) {
+  document.getElementById(msg.id).innerText = msg.data;
+  chatArea.scrollTop = chatArea.scrollHeight;
+});
+
+socket.emit('chat', {
+  messages: [{
+    'role': 'user',
+    'content': "What is the capital of France?",
+  }],
+  id: "unique_id_1"
+});
+```
+- Query the Speech-To-Text model using HTTP POST:
+```javascript
+$.ajax({
+  url: '/api/v1/transcript',
+  data: fd,
+  processData: false,
+  contentType: false,
+  crossDomain: true,
+  type: 'POST',
+  success: function(data_transcript){
+      console.log(data_transcript);
+  }
+});
+```
+- Socket for querying the Speech-To-Text model and listen to a output stream:
+> Comming soon
+
+
