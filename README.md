@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="https://huggingface.co/BioMistral/BioMistral-7B/resolve/main/wordart_blue_m_rectangle.png?download=true" alt="drawing" width="250"/>
+  <img src="https://raw.githubusercontent.com/BioMistral/Tchat/main/static/images/wordart-tchat.png?download=true" alt="drawing" width="250"/>
 </p>
 
-BioMistral 7B is the best performing open-source medical Large Language Model (LLM) in this weight category. 
+Tchat is an fast and open-source online multi-turn conversationnal agent chatting service, allowing to have access to a broad range of large language models (LLMs) everywhere from the web. It include a speech-to-text module which allow voice-based interactions.
 
-We've publicly released the weights for BioMistral 7B on Huggingface and our full multilingual benchmark on GitHub.
+It's build to run any LLMs and ASR systems, but serve as a demonstration tool for BioMistral 7B suite of models.
 
 - 📰 Paper: BioMistral: <a href="https://arxiv.org/abs/2402.10373"> A Collection of Open-Source Pretrained Large Language Models for Medical Domains</a> (pre-print)
 
