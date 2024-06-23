@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>BioMistral Speech</title>
+    <link href="{{ url_for('static', filename='styles/app.css')}}" rel="stylesheet" type="text/css">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    
+    <!-- <h1>BioMistral Speech</h1> -->
+
+    <div class="wrapper">
+
+
+      <!-- <section class="main-controls">
+        <canvas class="visualizer" height="60px"></canvas>
+        <div id="buttons">
+        </div>
+      </section> -->
+
+      <!-- <section class="sound-clips">
+      </section> -->
+
+      <section id="chat-area" class="chat-area" style="width: 100%; height: 85%; overflow-y: scroll;">
+      </section>
+      
+      <div class="flex items-center pt-4">
+                  
+        <div style="width: 100%;">
+           <label for="chat" class="sr-only">Your message</label>
+           <div class="flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
+              
+            <textarea id="prompt-text" name="text" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' style="width: 100%; padding: 1em;" rows="1" class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Message BioMistral..."></textarea>
+              
+              <button id="submit-text" class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
+                <svg class="w-5 h-5 rotate-90 rtl:-rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                  <path d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z"/>
+                </svg>
+                <span class="sr-only">Send message</span>
+              </button>
+                      
+              <button type="button" class="record" id="record" style="display: block">
+                <svg class="w-5 h-5 rotate-90 rtl:-rotate-90" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 475.085 475.085" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M237.541 328.897c25.128 0 46.632-8.946 64.523-26.83 17.888-17.884 26.833-39.399 26.833-64.525V91.365c0-25.126-8.938-46.632-26.833-64.525C284.173 8.951 262.669 0 237.541 0c-25.125 0-46.632 8.951-64.524 26.84-17.893 17.89-26.838 39.399-26.838 64.525v146.177c0 25.125 8.949 46.641 26.838 64.525 17.889 17.884 39.399 26.83 64.524 26.83z" fill="#3182ce" opacity="1" data-original="#3182ce" class=""></path><path d="M396.563 188.15c-3.606-3.617-7.898-5.426-12.847-5.426-4.944 0-9.226 1.809-12.847 5.426-3.613 3.616-5.421 7.898-5.421 12.845v36.547c0 35.214-12.518 65.333-37.548 90.362-25.022 25.03-55.145 37.545-90.36 37.545-35.214 0-65.334-12.515-90.365-37.545-25.028-25.022-37.541-55.147-37.541-90.362v-36.547c0-4.947-1.809-9.229-5.424-12.845-3.617-3.617-7.895-5.426-12.847-5.426s-9.235 1.809-12.85 5.426c-3.618 3.616-5.426 7.898-5.426 12.845v36.547c0 42.065 14.04 78.659 42.112 109.776 28.073 31.118 62.762 48.961 104.068 53.526v37.691h-73.089c-4.949 0-9.231 1.811-12.847 5.428-3.617 3.614-5.426 7.898-5.426 12.847 0 4.941 1.809 9.233 5.426 12.847 3.616 3.614 7.898 5.428 12.847 5.428h182.719c4.948 0 9.236-1.813 12.847-5.428 3.621-3.613 5.431-7.905 5.431-12.847 0-4.948-1.81-9.232-5.431-12.847-3.61-3.617-7.898-5.428-12.847-5.428h-73.08v-37.691c41.299-4.565 75.985-22.408 104.061-53.526 28.076-31.117 42.12-67.711 42.12-109.776v-36.547c0-4.946-1.813-9.225-5.435-12.845z" fill="#3182ce" opacity="1" data-original="#3182ce" class=""></path></g></svg>
+              </button>
+              
+              <button type="button" class="stop" id="stop" style="display: none;">
+                <svg class="w-5 h-5 rotate-90 rtl:-rotate-90" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 475.085 475.085" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M237.541 328.897c25.128 0 46.632-8.946 64.523-26.83 17.888-17.884 26.833-39.399 26.833-64.525V91.365c0-25.126-8.938-46.632-26.833-64.525C284.173 8.951 262.669 0 237.541 0c-25.125 0-46.632 8.951-64.524 26.84-17.893 17.89-26.838 39.399-26.838 64.525v146.177c0 25.125 8.949 46.641 26.838 64.525 17.889 17.884 39.399 26.83 64.524 26.83z" fill="#f00" opacity="1" data-original="#f00" class=""></path><path d="M396.563 188.15c-3.606-3.617-7.898-5.426-12.847-5.426-4.944 0-9.226 1.809-12.847 5.426-3.613 3.616-5.421 7.898-5.421 12.845v36.547c0 35.214-12.518 65.333-37.548 90.362-25.022 25.03-55.145 37.545-90.36 37.545-35.214 0-65.334-12.515-90.365-37.545-25.028-25.022-37.541-55.147-37.541-90.362v-36.547c0-4.947-1.809-9.229-5.424-12.845-3.617-3.617-7.895-5.426-12.847-5.426s-9.235 1.809-12.85 5.426c-3.618 3.616-5.426 7.898-5.426 12.845v36.547c0 42.065 14.04 78.659 42.112 109.776 28.073 31.118 62.762 48.961 104.068 53.526v37.691h-73.089c-4.949 0-9.231 1.811-12.847 5.428-3.617 3.614-5.426 7.898-5.426 12.847 0 4.941 1.809 9.233 5.426 12.847 3.616 3.614 7.898 5.428 12.847 5.428h182.719c4.948 0 9.236-1.813 12.847-5.428 3.621-3.613 5.431-7.905 5.431-12.847 0-4.948-1.81-9.232-5.431-12.847-3.61-3.617-7.898-5.428-12.847-5.428h-73.08v-37.691c41.299-4.565 75.985-22.408 104.061-53.526 28.076-31.117 42.12-67.711 42.12-109.776v-36.547c0-4.946-1.813-9.225-5.435-12.845z" fill="#f00" opacity="1" data-original="#f00" class=""></path></g></svg>
+              </button>
+              
+              <button type="button" class="clear" id="clear" style="display: block;">
+                <svg class="w-5 h-5 rotate-90 rtl:-rotate-90" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 97 97" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><g fill="#3182ce"><path d="M66.145 13.156a8.694 8.694 0 1 1 15.43 8.015l-8.928 17.143a8.645 8.645 0 0 1-1.312 1.868c2.44 3.612 3.196 8.258 1.65 12.655a358.309 358.309 0 0 1-1.11 3.115.798.798 0 0 1-1.122.435l-28.81-15.056a.806.806 0 0 1-.222-1.254c.717-.795 1.415-1.592 2.085-2.376 3.152-3.689 7.822-5.775 12.538-5.62.054-.11.11-.22.17-.329zM37.719 44.991a.807.807 0 0 0-.923.126c-1.773 1.648-3.543 3.087-5.193 4.11-5.574 3.458-10.182 4.705-13.044 5.147a4.922 4.922 0 0 0-3.694 2.733c-.69 1.46-.639 3.372.705 4.853 1.48 1.63 3.672 3.789 6.834 6.386a.8.8 0 0 0 .665.165c2.212-.445 4.515-.865 6.525-1.915.584-.306 1.46-.85 2.558-1.793 1.094-.938 2.758-.837 3.718.225a2.52 2.52 0 0 1-.243 3.621c-1.388 1.19-2.596 1.965-3.553 2.466-.783.409-1.603.749-2.44 1.04-.636.22-.785 1.076-.233 1.461 1.593 1.11 3.33 2.269 5.223 3.473a83.238 83.238 0 0 0 2.86 1.738c.266.155.6.141.85-.039a34.027 34.027 0 0 0 3.464-2.826c2.146-2.013 3.997-4.23 5.494-6.782.73-1.24 2.332-1.678 3.58-.975s1.67 2.278.94 3.52c-1.752 2.986-3.92 5.6-6.435 7.959-.435.408-.908.83-1.417 1.26-.45.38-.37 1.105.164 1.354a75.51 75.51 0 0 0 7.707 3.113c2.674.904 5.533-.13 7.067-2.428 1.94-2.905 5.348-8.385 8.273-15.053.76-1.73 1.532-3.616 2.289-5.55a.798.798 0 0 0-.374-.997zM22.974 37.907a3.767 3.767 0 1 0 0-7.533 3.767 3.767 0 0 0 0 7.533zM12.72 49.485a3.767 3.767 0 1 0 0-7.533 3.767 3.767 0 0 0 0 7.533z" fill="#3182ce" opacity="1" data-original="#3182ce"></path></g></g></svg>
+              </button>
+        
+      </div>
+    </div>
+
+     </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts/app.js')}}"></script>
+
+  </body>
+</html>
