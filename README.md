@@ -33,7 +33,7 @@ This project is the result of the collaboration between:
 
 # Demonstration
 
-<img src="https://github.com/BioMistral/Tchat/raw/main/static/images/Screen-Recording-2024-06-23-at-14.01.51.gif" alt="Demonstration Tchat" style="width: 100%; object-fit: cover;">
+<img src="https://github.com/BioMistral/Tchat/raw/main/static/images/Screen-Recording-2024-06-23-at-14.01.51-2.gif" alt="Demonstration Tchat" style="width: 100%; object-fit: cover;">
 
 # Setup
 
