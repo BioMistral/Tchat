@@ -1,0 +1,6 @@
+flask==3.0.3
+torch==2.2.2
+transfomers==4.41.2
+flask_socketio==5.3.6
+ollama==0.1.7
+accelerate==0.28.0
