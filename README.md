@@ -94,4 +94,13 @@ $.ajax({
 - Socket for querying the Speech-To-Text model and listen to a output stream:
 > Comming soon
 
+# Tech stack
 
+- Flask
+- Jinja2
+- Socket.IO
+- jQuery
+- TailwindCSS
+- Hugging Face Transformers (for DistilWhisper)
+- Ollama (for LLMs)
+- Javascript
