@@ -31,6 +31,10 @@ This project is the result of the collaboration between:
 
 **Caution:** We recommend using BioMistral 7B strictly as a research tool and advise against deploying it in production environments for natural language generation or any professional health and medical purposes.
 
+# Demonstration
+
+  <img src="https://github.com/BioMistral/Tchat/raw/main/static/images/Screen-Recording-2024-06-23-at-14.01.51.gif" alt="Demonstration Tchat" style="width:1280px;height:720px;">
+
 # Setup
 
 1. Create a conda environement `test`
